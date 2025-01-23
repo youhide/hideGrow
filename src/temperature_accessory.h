@@ -1,3 +1,6 @@
+#ifndef TEMPERATURE_ACCESSORY_H
+#define TEMPERATURE_ACCESSORY_H
+
 #include "HomeSpan.h"
 #include <Wire.h>
 
@@ -33,3 +36,5 @@ struct TempSensor : Service::TemperatureSensor {
     }
   }
 };
+
+#endif

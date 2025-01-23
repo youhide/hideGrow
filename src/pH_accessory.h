@@ -1,3 +1,6 @@
+#ifndef PH_ACCESSORY_H
+#define PH_ACCESSORY_H
+
 #include "HomeSpan.h"
 #include <Wire.h>
 
@@ -34,3 +37,5 @@ struct PHSensor : Service::LightSensor {
     }
   }
 };
+
+#endif

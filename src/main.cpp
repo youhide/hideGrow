@@ -2,6 +2,7 @@
 #include "HomeSpan.h"
 #include "pH_accessory.h"
 #include "temperature_accessory.h"
+#include "co2_accessory.h"
 #include "DNSServer.h"
 
 void setup() {
@@ -21,6 +22,8 @@ void setup() {
     new PHSensor();
     // Add temperature sensor service
     new TempSensor();
+    // Add CO2 sensor service
+    new CO2Sensor();
 }
 
 void loop() {
