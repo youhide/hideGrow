@@ -5,43 +5,31 @@ ESP32-based environmental monitoring system with HomeKit integration for pH, tem
 ## Hardware Requirements
 
 - ESP32 development board
-- pH sensor (I2C interface)
-- DS18B20 temperature sensor (I2C interface)
+- ADS1115 16-bit ADC
+- pH sensor (analog output)
+- Temperature sensor (analog output)
 - MH-Z19B CO2 sensor (UART interface)
 
 ## Dependencies
 
 - HomeSpan library
 - Wire library (built-in)
+- Adafruit_ADS1X15 library
 - MH-Z19 library (version 1.5.4 or higher)
 - PlatformIO for development
 
 ## Pin Configuration
 
-| Sensor | Pin/Interface |
-|--------|--------------|
-| pH Sensor | I2C (SDA: GPIO21, SCL: GPIO22) |
-| Temperature Sensor | I2C (shared with pH sensor) |
+| Component | Pin/Interface |
+|-----------|--------------|
+| ADS1115 | I2C (SDA: GPIO21, SCL: GPIO22) |
+| pH Sensor | ADS1115 A0 |
+| Temperature Sensor | ADS1115 A1 |
 | CO2 Sensor | UART (RX: GPIO16, TX: GPIO17) |
-
-## Installation
-
-1. Clone the repository
-2. Open project in VSCode with PlatformIO extension
-3. Install dependencies through PlatformIO
-4. Upload to ESP32
-
-## Usage
-
-1. Power up the ESP32
-2. Add accessory to HomeKit:
-    - Open Home app
-    - Add accessory
-    - Scan code provided by device
-    - Follow pairing instructions
 
 ## Features
 
+- High precision 16-bit ADC readings using ADS1115
 - Real-time pH monitoring (0-14 range)
 - Temperature monitoring (-50°C to 100°C)
 - CO2 monitoring (400-5000ppm)

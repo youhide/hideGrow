@@ -3,34 +3,33 @@
 
 #include "HomeSpan.h"
 #include <Wire.h>
-
-#define DS18B20_I2C_ADDRESS 0x48  // Default I2C address for DS18B20
+#include <Adafruit_ADS1X15.h>
 
 struct TempSensor : Service::TemperatureSensor {
   SpanCharacteristic *currentTemp;
+  Adafruit_ADS1115 ads;
+  const float VOLTAGE_RANGE = 4.096;
+  const float ADC_RESOLUTION = 32767.0;
   
   TempSensor() : Service::TemperatureSensor() {
-    Wire.begin();
-    currentTemp = new Characteristic::CurrentTemperature(0);
+    ads.begin();
+    ads.setGain(GAIN_ONE);
+    
+    currentTemp = new Characteristic::CurrentTemperature(20);
     currentTemp->setRange(-50, 100);
   }
 
   float readTemperature() {
-    Wire.beginTransmission(DS18B20_I2C_ADDRESS);
-    Wire.write(0x00);  // Temperature register
-    Wire.endTransmission();
-    
-    Wire.requestFrom(DS18B20_I2C_ADDRESS, 2);
-    if(Wire.available() >= 2) {
-      int16_t temp = (Wire.read() << 8) | Wire.read();
-      return temp * 0.0625;  // Convert to Celsius
-    }
-    return -273;  // Error value
+    int16_t adc = ads.readADC_SingleEnded(1); // Read from A1
+    float voltage = (adc * VOLTAGE_RANGE) / ADC_RESOLUTION;
+    // Convert voltage to temperature (adjust formula based on your sensor)
+    float tempC = (voltage - 0.5) * 100.0; // Example conversion for LM35
+    return constrain(tempC, -50, 100);
   }
 
   void loop() {
     float tempC = readTemperature();
-    if(tempC > -273 && abs(currentTemp->getVal<float>() - tempC) > 0.5) {
+    if(abs(currentTemp->getVal<float>() - tempC) > 0.5) {
       currentTemp->setVal(tempC);
       delay(5000);
     }
