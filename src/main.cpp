@@ -1,20 +1,16 @@
 #include <Arduino.h>
 #include "HomeSpan.h"
 #include "pH_accessory.h"
+#include "temperature_accessory.h"
 #include "DNSServer.h"
-
-#define PH_SENSOR_PIN 35 // Analog pin for pH sensor
 
 void setup() {
   Serial.begin(115200);
+  homeSpan.begin(Category::Sensors, "pH & Temperature Sensor");
 
-  // Initialize HomeSpan
-  homeSpan.begin(Category::Sensors, "pH Sensor");
-  
-  // Define the accessory
   new SpanAccessory();
     new Service::AccessoryInformation();
-      new Characteristic::Name("pH Sensor");
+      new Characteristic::Name("pH & Temperature Sensor");
       new Characteristic::Manufacturer("hideGrow");
       new Characteristic::SerialNumber("123-ABC");
       new Characteristic::Model("HG-SENSOR-001");
@@ -22,7 +18,9 @@ void setup() {
       new Characteristic::Identify();
       
     // Add pH sensor service
-    new PHSensor(PH_SENSOR_PIN);
+    new PHSensor();
+    // Add temperature sensor service
+    new TempSensor();
 }
 
 void loop() {
