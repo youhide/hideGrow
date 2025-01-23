@@ -6,14 +6,14 @@
 
 void setup() {
   Serial.begin(115200);
-  homeSpan.begin(Category::Sensors, "pH & Temperature Sensor");
+  homeSpan.begin(Category::Sensors, "hideGrow Sensor Hub");
 
   new SpanAccessory();
     new Service::AccessoryInformation();
-      new Characteristic::Name("pH & Temperature Sensor");
+      new Characteristic::Name("hideGrow Sensor Hub");
       new Characteristic::Manufacturer("hideGrow");
       new Characteristic::SerialNumber("123-ABC");
-      new Characteristic::Model("HG-SENSOR-001");
+      new Characteristic::Model("HG-SENSORh-001");
       new Characteristic::FirmwareRevision("1.0");
       new Characteristic::Identify();
       
