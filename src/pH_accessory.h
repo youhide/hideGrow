@@ -30,7 +30,7 @@ struct PHSensor : Service::LightSensor {
     float pH = readPH();
     if(abs(currentPH->getVal<float>() - pH) > 0.1) {
       currentPH->setVal(pH);
+      delay(5000);
     }
-    delay(5000);
   }
 };

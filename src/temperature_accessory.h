@@ -29,7 +29,7 @@ struct TempSensor : Service::TemperatureSensor {
     float tempC = readTemperature();
     if(tempC > -273 && abs(currentTemp->getVal<float>() - tempC) > 0.5) {
       currentTemp->setVal(tempC);
+      delay(5000);
     }
-    delay(5000);
   }
 };
