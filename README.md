@@ -10,7 +10,6 @@ ESP32-based environmental monitoring system with HomeKit integration for pH, tem
 - DS18B20 temperature sensor (analog output)
 - MH-Z19B CO2 sensor (UART interface)
 
-
 ## Dependencies
 
 - HomeSpan library
