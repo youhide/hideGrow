@@ -6,9 +6,10 @@ ESP32-based environmental monitoring system with HomeKit integration for pH, tem
 
 - ESP32 development board
 - ADS1115 16-bit ADC
-- pH sensor (analog output)
-- Temperature sensor (analog output)
+- SEN0161 pH sensor (analog output)
+- DS18B20 temperature sensor (analog output)
 - MH-Z19B CO2 sensor (UART interface)
+
 
 ## Dependencies
 
